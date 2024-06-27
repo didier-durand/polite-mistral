@@ -13,7 +13,7 @@ from mistralai.models.models import ModelCard
 
 from dataset import prepare_polite_dataset_for_training, DS_POLITE_TEST_SIZE, DS_POLITE_TRAIN_SIZE, \
     DS_POLITE_MISTRAL_TRAIN_PATH, DS_POLITE_MISTRAL_TEST_PATH
-from util import DATA_DIR, ts_suffix
+from util import DATA_DIR, ts_suffix, on_laptop
 
 
 class TestMistralApi(unittest.TestCase):
@@ -23,6 +23,7 @@ class TestMistralApi(unittest.TestCase):
         self.assertGreater(len(self.api_key), 0, "api key is not set")
         self.client = MistralClient(api_key=self.api_key)
 
+    @unittest.skipIf(not on_laptop(), "skipped when not on laptop")
     def test_fine_tune_mistral_on_plateforme(self):
         dry_run = False
         training_steps = 60
