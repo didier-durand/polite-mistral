@@ -10,6 +10,12 @@ jobs:
         python-version: ["3.12"]
     steps:
     - uses: actions/checkout@v4.1.1
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v4.0.1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        fail_ci_if_error: true
+        verbose: true
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
@@ -34,7 +40,3 @@ jobs:
         export PYTHONPATH="$(pwd)/src:$(pwd)/test":$PYTHONPATH
         echo "PYTHONPATH:" $PYTHONPATH
         python -m unittest -v
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v4.0.1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
