@@ -1,0 +1,4 @@
+{
+    "prompt": "Below is an input sentence in a form that is not polite.\nWrite a response that appropriately changes this sentence to a polite form.\nChange all impolite, aggressive or offending words to polite words showing respect.\nDo NOT add any other word than the input sentence translated to polite form.\n### Input Sentence:\n{src}\n\n",
+    "completion": "{tgt}"
+}
