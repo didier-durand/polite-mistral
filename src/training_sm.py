@@ -6,7 +6,7 @@ from sagemaker import hyperparameters
 from sagemaker.huggingface import get_huggingface_llm_image_uri, HuggingFaceModel
 from sagemaker.jumpstart.estimator import JumpStartEstimator
 
-from bedrock import GenAiModel
+from genai_model import GenAiModel
 from iam import SM_ROLE
 from util import to_json, check_response
 

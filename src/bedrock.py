@@ -1,22 +1,12 @@
 import json
-from enum import Enum
 
 import boto3
 
+from genai_model import GenAiModel
 from util import check_response
 
 EMBEDDING_LENGTH: int = 1024
 
-
-class GenAiModel(Enum):
-    # Mistral Platform
-    PLATFORM_MISTRAL = "platform.mistral-embed"
-    # Hugging Face
-    HF_MISTRAL_7B = "huggingface-llm-mistral-7b"
-    HF_GEMMA_7B = "huggingface-llm-gemma-7b-instruct"
-    # Bedrock
-    TITAN_EMBED_TEXT_V2_0 = "amazon.titan-embed-text-v2:0"
-    COHERE_EMBED_ENGLISH_V3 = "cohere.embed-english-v3"
 
 def embed(model_id: GenAiModel, input_text: str = "") -> list[float] | Exception:
     bedrock_runtime = boto3.client(

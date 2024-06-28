@@ -13,7 +13,10 @@ from mistralai.models.models import ModelCard
 
 from dataset import prepare_polite_dataset_for_training, DS_POLITE_TEST_SIZE, DS_POLITE_TRAIN_SIZE, \
     DS_POLITE_MISTRAL_TRAIN_PATH, DS_POLITE_MISTRAL_TEST_PATH
-from util import DATA_DIR, ts_suffix, on_laptop
+from gauge_answer import GAUGE_SYS_PROMPT, POLITE_SAMPLES
+from genai_model import GenAiModel
+from mistral_chat import mistral_chat
+from util import DATA_DIR, ts_suffix, on_laptop, from_json, read_from_file
 
 
 class TestMistralApi(unittest.TestCase):
@@ -72,6 +75,16 @@ class TestMistralApi(unittest.TestCase):
         # cleanup
         self.client.files.delete(mistral_train_file.id)
         self.client.files.delete(mistral_test_file.id)
+
+    def test_invoke_mistral_chat_polite_samples(self):
+        polite_samples = from_json(read_from_file(POLITE_SAMPLES))
+        sys_prompt = GAUGE_SYS_PROMPT
+        #
+        for _, item in polite_samples.items():
+            prompt = item["src"]
+            print("\n--- prompt: ", prompt)
+            completion = mistral_chat(model=GenAiModel.MISTRAL_7B, prompt=prompt, sys_prompt=sys_prompt)
+            print("--- completion: ", completion)
 
     def test_list_models(self):
         delete_ft: bool = False

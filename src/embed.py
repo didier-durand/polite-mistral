@@ -3,7 +3,8 @@ from pathlib import Path
 
 from mistralai.client import MistralClient
 
-from bedrock import embed, GenAiModel
+from bedrock import embed
+from genai_model import GenAiModel
 from util import read_from_file, from_json, write_to_file, to_json
 
 CHECKPOINT = 100
@@ -34,10 +35,10 @@ def embed_dataset(dataset: Path, embedding_engines: list[GenAiModel] = None, max
                         changed = True
                 if isinstance(item[key], str):
                     if key not in item[EMBEDDING][embedding_engine.value]:
-                        if embedding_engine == GenAiModel.PLATFORM_MISTRAL:
+                        if embedding_engine == GenAiModel.MISTRAL_EMBED:
                             client = MistralClient(api_key=os.environ["MISTRAL_API_KEY"])
                             embeddings_response = client.embeddings(
-                                model="mistral-embed",
+                                model=GenAiModel.MISTRAL_EMBED.value,
                                 input=item[key]
                             )
                             item[EMBEDDING][embedding_engine.value][key] = embeddings_response.data[0].embedding

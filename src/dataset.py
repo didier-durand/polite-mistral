@@ -3,7 +3,7 @@ from pathlib import Path
 from datasets import load_dataset, Dataset
 from sagemaker.s3 import S3Uploader
 
-from bedrock import GenAiModel
+from genai_model import GenAiModel
 from embed import embed_dataset
 from training_sm import AWS_LLM_TRAINING
 from util import DATA_DIR, write_to_file, to_json, on_laptop, to_jsonl
@@ -144,7 +144,7 @@ def embed_polite_dataset() -> bool:
                   embedding_engines=[
                       GenAiModel.TITAN_EMBED_TEXT_V2_0,
                       GenAiModel.COHERE_EMBED_ENGLISH_V3,
-                      GenAiModel.PLATFORM_MISTRAL,
+                      GenAiModel.MISTRAL_EMBED,
                   ],
                   max_count=DS_POLITE_TEST_SIZE
                   )
@@ -156,7 +156,7 @@ def embed_stsb_dataset() -> bool:
                   embedding_engines=[
                       GenAiModel.TITAN_EMBED_TEXT_V2_0,
                       GenAiModel.COHERE_EMBED_ENGLISH_V3,
-                      GenAiModel.PLATFORM_MISTRAL,
+                      GenAiModel.MISTRAL_EMBED,
                   ],
                   max_count=DS_STSB_TEST_SIZE
                   )

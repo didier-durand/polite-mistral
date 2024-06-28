@@ -1,6 +1,7 @@
 import unittest
 
-from bedrock import embed, EMBEDDING_LENGTH, GenAiModel
+from bedrock import embed, EMBEDDING_LENGTH
+from genai_model import GenAiModel
 from util import on_laptop
 
 
