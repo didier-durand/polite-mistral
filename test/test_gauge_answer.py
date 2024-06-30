@@ -11,4 +11,4 @@ class TestGaugeAnswer(unittest.TestCase):
     @unittest.skipIf(not on_laptop(), "skipped when not on laptop")
     def test_gauge_answer(self):
         confidence = gauge_answer(src="WTF was Rob thinking?", sys_prompt=GAUGE_SYS_PROMPT)
-        print("confidence: ",confidence)
+        print("confidence: ", confidence)

@@ -73,8 +73,9 @@ class TestMistralApi(unittest.TestCase):
                 created_job = self.client.jobs.retrieve(created_job.id)
                 print("status: ", created_job.status, "created job:", created_job.id)
         # cleanup
-        self.client.files.delete(mistral_train_file.id)
-        self.client.files.delete(mistral_test_file.id)
+        if dry_run:
+            self.client.files.delete(mistral_train_file.id)
+            self.client.files.delete(mistral_test_file.id)
 
     def test_invoke_mistral_chat_polite_samples(self):
         polite_samples = from_json(read_from_file(POLITE_SAMPLES))

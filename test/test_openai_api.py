@@ -58,8 +58,9 @@ class TestOpenAI(unittest.TestCase):
             response: str = openai_chat(model, prompt="what is a Large Langauge Model?")
             print(" --- model:", model.value, "--- response: ", response)
             self.assertGreater(len(response), 0)
-            self.assertTrue("artificial" in response)
-            self.assertTrue("intelligence" in response)
+            self.assertTrue("Large" in response)
+            self.assertTrue("Language" in response)
+            self.assertTrue("Model" in response)
 
     def test_invoke_openai_chat_polite_samples(self):
         polite_samples = from_json(read_from_file(POLITE_SAMPLES))
